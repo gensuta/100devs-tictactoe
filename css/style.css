@@ -1,0 +1,36 @@
+/******************************************
+/* CSS
+/*******************************************/
+
+/* Box Model Hack */
+*{
+  box-sizing: border-box;
+}
+
+/******************************************
+/* LAYOUT
+/*******************************************/
+
+.custom-center{
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/******************************************
+/* ADDITIONAL STYLES
+/*******************************************/
+
+/* MOBILE */
+@media screen and (min-width:480px) {
+
+}
+
+/* TABLET */
+@media screen and (min-width:800px) {
+}
+
+/* DESKTOP */
+@media screen and (min-width:1024px) {
+}
