@@ -22,6 +22,8 @@
     justify-content: center;
 } */
 
+ /* Board Set-up */
+
 .board {
   width: 100vw;
   height: 100vh;
@@ -42,6 +44,7 @@
   align-items: center;
   position: relative;
   cursor: pointer;
+  font-size: 5rem;
 }
 
 .cell:first-child,
@@ -63,6 +66,48 @@
 .cell:nth-child(7){
   border-bottom: none;
 }
+
+/* When cell is filled, cursor shows a not allowed picture */
+.cell.x,
+.cell.circle{
+  cursor: not-allowed;
+}
+
+
+/* Winning Message - Toggle on and off with show class*/
+
+.winning-message {
+  display: none;
+  position: fixed;
+  background-color: rgba(0, 0, 0, .9);
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 5rem;
+  flex-direction: column;
+}
+
+.winning-message button {
+  font-size: 3rem;
+  background-color: white;
+  border: 1px solid black;
+  padding: .25em .5em;
+  cursor: pointer;
+}
+
+.winning-message button:hover {
+  background-color: black;
+  color: white;
+  border-color: white;
+}
+
+.winning-message.show {
+  display: flex;
+}
+
+
+
+
 /******************************************
 /* ADDITIONAL STYLES
 /*******************************************/

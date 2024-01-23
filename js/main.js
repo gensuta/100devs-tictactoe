@@ -1,5 +1,7 @@
 const body = document.body;
 const cells = document.getElementsByClassName('cell');
+const xClass = 'x';
+const circleClass = 'circle';
 
 let dataCells = [];
 
