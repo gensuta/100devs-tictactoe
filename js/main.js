@@ -1,7 +1,9 @@
 // *VARIABLES* //
-
 const body = document.body; // storing our body to get it quicker
 const cells = document.getElementsByClassName('cell'); // storing all the divs with the class name cell
+
+const xClass = 'x';
+const circleClass = 'circle';
 
 let dataCells = []; // this is where our DataCell objects will live
 
