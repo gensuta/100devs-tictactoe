@@ -16,10 +16,9 @@ const winningMessageText = document.querySelector('[data-winning-message-text]')
 
 // *FUNCTIONS* //
 
-function StartGame()
+// this should be called only ONCE when the page loads to initialize everything
+function InitGame()
 {
-    currentSymbol = 'X';
-
     dataCells = []; // clearing the array just in case
 
     //using ... to turn cells from an HTMLCollection to an array
@@ -29,6 +28,15 @@ function StartGame()
 
         dataCells.push(newDataCell); // adding our new DataCell to our array! Gotta keep track of them.
     });
+}
+
+
+function StartGame()
+{
+    currentSymbol = 'X';
+    
+    dataCells.forEach(cell => {cell.ResetCell()});
+
     winningMessageElement.classList.remove('show');
 }
 
@@ -136,15 +144,15 @@ function isDraw(){
 // The DataCell class represents each box that can be filled with X or O
 class DataCell{
 
-    isFilled = false;
-    symbol = ""; // our symbol should be empty! along with it's text
-
     // This constructor is filled with events so that each datacell is being tracked properly
     // Meaning, when a new DataCell is created, it stores one of the divs into it's "cellElement", sets it's symbol to blank
     // and makes sure it's checking if the cellElement is being hovered on, clicked, or if it stopped being hovered on
+
     constructor(c){
         this.cellElement = c;
         this.cellElement.dataset.index = c.dataset.index; // Assigning index to the dataset
+        this.isFilled = false;
+        this.symbol = ""; // our symbol should be empty! along with it's text
 
         this.cellElement.addEventListener("mouseover", (event) => {
             if(!this.isFilled)
@@ -164,7 +172,9 @@ class DataCell{
         });
 
         this.cellElement.addEventListener("mousedown", () => {
-            if(!this.isFilled)
+            console.log(`bro!!!! we are ${this.isFilled}`);
+            
+            if(!this.isFilled && this.symbol == "")
             {
                 this.SetSymbol(); // since we clicked on a cell, we're setting the text to our current symbol (X or O)
                 CheckForWin();
@@ -172,16 +182,29 @@ class DataCell{
             }
         });
     }
+
+    // added to ensure we don't have to create new DataCells everytime we restart the game
+    // it was most likely causing the issue where the symbols would switch after winning
+    ResetCell()
+    {
+        this.isFilled = false;
+        this.cellElement.style.color = "black";
+        this.symbol = "";
+        this.cellElement.textContent = "";
+    }
  
     SetSymbol() // setting the cell to an X or O. Making sure it can't be overwritten by setting isFilled to true
-    {
+    {        
+        this.isFilled = true;
         this.cellElement.style.color = "black";
         this.symbol = currentSymbol;
         this.cellElement.textContent = currentSymbol;
-        this.isFilled = true;
+        console.log(`${this.symbol} vs ${currentSymbol} and we are ${this.cellElement.dataset.index}`);
+
     }
 }
 
 // *FUNCTIONS TO BE CALLED WHEN THE PAGE LOADS* //
 
+InitGame();
 StartGame(); // we start the game whent he page loads
